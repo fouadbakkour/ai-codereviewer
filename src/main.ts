@@ -8,9 +8,7 @@ import minimatch from "minimatch";
 const GITHUB_TOKEN: string = core.getInput("GITHUB_TOKEN");
 const OPENAI_API_KEY: string = core.getInput("OPENAI_API_KEY");
 const OPENAI_API_MODEL: string = core.getInput("OPENAI_API_MODEL");
-const OPEN_AI_BASE_URL: string = core.getInput("OPEN_AI_BASE_URL");
-console.log("+++++++++++", OPEN_AI_BASE_URL)
-
+const OPEN_AI_BASE_URL: string = core.getInput("OPEN_AI_BASE_URL")
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
 const openai = new OpenAI({
@@ -185,8 +183,8 @@ async function createReviewComment(
 }
 
 async function main() {
-  console.log(">>>>>>>>>>>>>");
   const prDetails = await getPRDetails();
+  console.log(">>>>>>>>>>>>>");
   let diff: string | null;
   const eventData = JSON.parse(
     readFileSync(process.env.GITHUB_EVENT_PATH ?? "", "utf8")
