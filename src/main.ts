@@ -25,6 +25,7 @@ interface PRDetails {
 }
 
 async function getPRDetails(): Promise<PRDetails> {
+  console.log("+++++++ Getting PR details");
   const { repository, number } = JSON.parse(
     readFileSync(process.env.GITHUB_EVENT_PATH || "", "utf8")
   );
