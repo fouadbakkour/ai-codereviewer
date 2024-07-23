@@ -120,9 +120,8 @@ async function getAIResponse(prompt: string): Promise<Array<{
     model: OPENAI_API_MODEL,
     temperature: 0.2,
     max_tokens: 700,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
+    n: 1,
+    stop: ["[INST]", "[/INST]", "<s>", "</s>"]
   };
 
   try {
