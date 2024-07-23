@@ -8,11 +8,13 @@ import minimatch from "minimatch";
 const GITHUB_TOKEN: string = core.getInput("GITHUB_TOKEN");
 const OPENAI_API_KEY: string = core.getInput("OPENAI_API_KEY");
 const OPENAI_API_MODEL: string = core.getInput("OPENAI_API_MODEL");
+const OPEN_AI_BASE_URL: string = core.getInput("OPEN_AI_BASE_URL");
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
+  baseURL: OPEN_AI_BASE_URL,
 });
 
 interface PRDetails {
@@ -245,6 +247,5 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("okokokokokok new Error:", error);
   process.exit(1);
 });

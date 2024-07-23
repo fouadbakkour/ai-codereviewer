@@ -51,9 +51,11 @@ const minimatch_1 = __importDefault(__nccwpck_require__(2002));
 const GITHUB_TOKEN = core.getInput("GITHUB_TOKEN");
 const OPENAI_API_KEY = core.getInput("OPENAI_API_KEY");
 const OPENAI_API_MODEL = core.getInput("OPENAI_API_MODEL");
+const OPEN_AI_BASE_URL = core.getInput("OPEN_AI_BASE_URL");
 const octokit = new rest_1.Octokit({ auth: GITHUB_TOKEN });
 const openai = new openai_1.default({
     apiKey: OPENAI_API_KEY,
+    baseURL: OPEN_AI_BASE_URL,
 });
 function getPRDetails() {
     var _a, _b;
@@ -233,7 +235,6 @@ function main() {
     });
 }
 main().catch((error) => {
-    console.error("okokokokokok new Error:", error);
     process.exit(1);
 });
 
