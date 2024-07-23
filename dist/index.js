@@ -148,7 +148,7 @@ function getAIResponse(prompt) {
             stop: ["[INST]", "[/INST]", "<s>", "</s>"]
         };
         try {
-            console.log("+++++++ Sending request to OpenAI");
+            console.log("+++++++ Sending request to AI Model: prompt", prompt);
             const response = yield openai.chat.completions.create(Object.assign(Object.assign(Object.assign({}, queryConfig), (OPENAI_API_MODEL === "gpt-4-1106-preview"
                 ? { response_format: { type: "json_object" } }
                 : {})), { messages: [
@@ -157,6 +157,7 @@ function getAIResponse(prompt) {
                         content: prompt,
                     },
                 ] }));
+            console.log("+++++++ Getting response form AI Model: response", response);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
             return JSON.parse(res).reviews;
         }
