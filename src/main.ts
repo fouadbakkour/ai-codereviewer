@@ -244,6 +244,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("Error:", error);
+  console.error("TESTTT Error:", error);
   process.exit(1);
 });
