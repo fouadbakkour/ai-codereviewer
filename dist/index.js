@@ -233,7 +233,7 @@ function main() {
     });
 }
 main().catch((error) => {
-    console.error("TESTTT Error:", error);
+    console.error("TESTing new Error:", error);
     process.exit(1);
 });
 
