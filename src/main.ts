@@ -185,7 +185,7 @@ async function createReviewComment(
 }
 
 async function main() {
-  console.log(">>>>>>>>>>>>>");
+  console.log(">>>>>>>>>>>>> 2");
   const prDetails = await getPRDetails();
   
   let diff: string | null;
