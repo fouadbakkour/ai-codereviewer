@@ -9,6 +9,7 @@ const GITHUB_TOKEN: string = core.getInput("GITHUB_TOKEN");
 const OPENAI_API_KEY: string = core.getInput("OPENAI_API_KEY");
 const OPENAI_API_MODEL: string = core.getInput("OPENAI_API_MODEL");
 const OPEN_AI_BASE_URL: string = core.getInput("OPEN_AI_BASE_URL");
+console.log("+++++++++++", OPEN_AI_BASE_URL)
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
