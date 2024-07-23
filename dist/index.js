@@ -109,7 +109,9 @@ function analyzeCode(parsedDiff, prDetails) {
     });
 }
 function createPrompt(file, chunk, prDetails) {
-    return `Your task is to review pull requests. Instructions:
+    console.log("+++++++ chunk.content", chunk.content);
+    console.log("+++++++ chunk.changes", chunk.changes);
+    return `<s>[INST]<<SYS>>\nYour task is to review pull requests. Instructions:
 - Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
@@ -117,7 +119,7 @@ function createPrompt(file, chunk, prDetails) {
 - Use the given description only for the overall context and only comment the code.
 - IMPORTANT: NEVER suggest adding comments to the code.
 
-Review the following code diff in the file "${file.to}" and take the pull request title and description into account when writing the response.
+Review the following code diff in the file "${file.to}" and take the pull request title and description into account when writing the response.\n<</SYS>>
   
 Pull request title: ${prDetails.title}
 Pull request description:
@@ -135,7 +137,7 @@ ${chunk.changes
         .map((c) => `${c.ln ? c.ln : c.ln2} ${c.content}`)
         .join("\n")}
 \`\`\`
-`;
+[/INST]</s>`;
 }
 function getAIResponse(prompt) {
     return __awaiter(this, void 0, void 0, function* () {

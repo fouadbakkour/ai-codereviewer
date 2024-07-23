@@ -81,7 +81,9 @@ async function analyzeCode(
 }
 
 function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
-  return `Your task is to review pull requests. Instructions:
+  console.log("+++++++ chunk.content", chunk.content);
+  console.log("+++++++ chunk.changes", chunk.changes);
+  return `<s>[INST]<<SYS>>\nYour task is to review pull requests. Instructions:
 - Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
@@ -91,7 +93,7 @@ function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
 
 Review the following code diff in the file "${
     file.to
-  }" and take the pull request title and description into account when writing the response.
+  }" and take the pull request title and description into account when writing the response.\n<</SYS>>
   
 Pull request title: ${prDetails.title}
 Pull request description:
@@ -109,7 +111,7 @@ ${chunk.changes
   .map((c) => `${c.ln ? c.ln : c.ln2} ${c.content}`)
   .join("\n")}
 \`\`\`
-`;
+[/INST]</s>`;
 }
 
 async function getAIResponse(prompt: string): Promise<Array<{
