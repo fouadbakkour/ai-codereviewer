@@ -182,6 +182,7 @@ async function createReviewComment(
 }
 
 async function main() {
+  console.log(">>>>>>>>>>>>>");
   const prDetails = await getPRDetails();
   let diff: string | null;
   const eventData = JSON.parse(
