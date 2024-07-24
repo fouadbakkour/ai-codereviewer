@@ -160,6 +160,13 @@ function getAIResponse(prompt) {
                 ] }));
             console.log("+++++++ Getting response form AI Model: response", response);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
+            const parsedJson = extractJson(res);
+            if (parsedJson) {
+                console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
+            }
+            else {
+                console.error('Failed to extract JSON.');
+            }
             return JSON.parse(res).reviews;
         }
         catch (error) {
@@ -167,6 +174,24 @@ function getAIResponse(prompt) {
             return null;
         }
     });
+}
+// Function to extract JSON content
+function extractJson(input) {
+    const jsonStart = input.indexOf('```json\n') + 8;
+    const jsonEnd = input.indexOf('\n```', jsonStart);
+    if (jsonStart === -1 || jsonEnd === -1) {
+        console.error('JSON content not found.');
+        return null;
+    }
+    const jsonString = input.slice(jsonStart, jsonEnd).trim();
+    try {
+        const jsonObject = JSON.parse(jsonString);
+        return jsonObject;
+    }
+    catch (error) {
+        console.error('Error parsing JSON:', error);
+        return null;
+    }
 }
 function createComment(file, chunk, aiResponses) {
     return aiResponses.flatMap((aiResponse) => {

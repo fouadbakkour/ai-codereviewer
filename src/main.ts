@@ -143,9 +143,36 @@ async function getAIResponse(prompt: string): Promise<Array<{
 
     console.log("+++++++ Getting response form AI Model: response", response);
     const res = response.choices[0].message?.content?.trim() || "{}";
+    const parsedJson = extractJson(res);
+    if (parsedJson) {
+      console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
+    } else {
+      console.error('Failed to extract JSON.');
+    }
     return JSON.parse(res).reviews;
   } catch (error) {
     console.error("Error:", error);
+    return null;
+  }
+}
+
+// Function to extract JSON content
+function extractJson(input: string): object | null {
+  const jsonStart = input.indexOf('```json\n') + 8;
+  const jsonEnd = input.indexOf('\n```', jsonStart);
+  
+  if (jsonStart === -1 || jsonEnd === -1) {
+    console.error('JSON content not found.');
+    return null;
+  }
+  
+  const jsonString = input.slice(jsonStart, jsonEnd).trim();
+  
+  try {
+    const jsonObject = JSON.parse(jsonString);
+    return jsonObject;
+  } catch (error) {
+    console.error('Error parsing JSON:', error);
     return null;
   }
 }
