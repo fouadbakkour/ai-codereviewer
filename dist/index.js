@@ -144,9 +144,8 @@ function getAIResponse(prompt) {
         const queryConfig = {
             model: OPENAI_API_MODEL,
             temperature: 0.2,
-            max_tokens: 700,
+            max_tokens: 1024,
             n: 1,
-            stop: ["[INST]", "[/INST]", "<s>", "</s>"]
         };
         try {
             console.log("+++++++ Sending request to AI Model: prompt", prompt);
