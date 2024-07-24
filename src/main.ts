@@ -110,8 +110,7 @@ ${chunk.changes
   // @ts-expect-error - ln and ln2 exists where needed
   .map((c) => `${c.ln ? c.ln : c.ln2} ${c.content}`)
   .join("\n")}
-\`\`\`
-[/INST]</s>`;
+\`\`\`[/INST]</s>`;
 }
 
 async function getAIResponse(prompt: string): Promise<Array<{
