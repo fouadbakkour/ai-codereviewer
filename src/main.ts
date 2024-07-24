@@ -144,6 +144,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
     console.log("+++++++ Getting response form AI Model: response", response);
     const res = response.choices[0].message?.content?.trim() || "{}";
     const parsedJson = extractJson(res);
+    console.log("+++++++ parsedJson", parsedJson);
     if (parsedJson) {
       console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
     } else {

@@ -161,6 +161,7 @@ function getAIResponse(prompt) {
             console.log("+++++++ Getting response form AI Model: response", response);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
             const parsedJson = extractJson(res);
+            console.log("+++++++ parsedJson", parsedJson);
             if (parsedJson) {
                 console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
             }
