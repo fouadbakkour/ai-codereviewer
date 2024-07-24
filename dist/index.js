@@ -146,6 +146,7 @@ function getAIResponse(prompt) {
             temperature: 0.2,
             max_tokens: 1024,
             n: 1,
+            stop: ["</s>"]
         };
         try {
             console.log("+++++++ Sending request to AI Model: prompt", prompt);

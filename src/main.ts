@@ -122,6 +122,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
     temperature: 0.2,
     max_tokens: 1024,
     n: 1,
+    stop: ["</s>"]
   };
 
   try {
