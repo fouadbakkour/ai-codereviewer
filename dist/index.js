@@ -158,7 +158,10 @@ function getAIResponse(prompt) {
                         content: prompt,
                     },
                 ] }));
-            console.log("+++++++ Getting response form AI Model: response", response);
+            console.log("+++++++ Getting response form AI Model: ", response);
+            console.log("+++++++ Response keys: ", Object.keys(response));
+            const ewwresponse = JSON.parse(response.object);
+            console.log("+++++++ ewwresponse: ", ewwresponse);
             console.log("+++++++ Getting response form AI Model: response", response["choices"]);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
             const newRes = res + "]}";

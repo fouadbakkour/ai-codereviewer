@@ -141,7 +141,10 @@ async function getAIResponse(prompt: string): Promise<Array<{
       ],
     });
 
-    console.log("+++++++ Getting response form AI Model: response", response);
+    console.log("+++++++ Getting response form AI Model: ", response);
+    console.log("+++++++ Response keys: ", Object.keys(response));
+    const ewwresponse = JSON.parse(response.object);
+    console.log("+++++++ ewwresponse: ", ewwresponse);
     console.log("+++++++ Getting response form AI Model: response", response["choices"]);
     const res = response.choices[0].message?.content?.trim() || "{}";
     const newRes = res + "]}";
