@@ -160,6 +160,8 @@ function getAIResponse(prompt) {
                 ] }));
             console.log("+++++++ Getting response form AI Model: ", response);
             const responseString = JSON.stringify(response);
+            const responseObject = JSON.parse(responseString);
+            console.log("Parsed response object:", responseObject);
             console.log("+++++++ Response string: ", responseString);
             console.log("+++++++ Response keys: ", Object.keys(response));
             const ewwresponse = JSON.parse(response.object);
