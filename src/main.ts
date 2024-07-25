@@ -110,7 +110,7 @@ ${chunk.changes
   // @ts-expect-error - ln and ln2 exists where needed
   .map((c) => `${c.ln ? c.ln : c.ln2} ${c.content}`)
   .join("\n")}
-\`\`\`[/INST]`;
+\`\`\`[/INST] { "reviews": [`;
 }
 
 async function getAIResponse(prompt: string): Promise<Array<{
@@ -141,16 +141,17 @@ async function getAIResponse(prompt: string): Promise<Array<{
       ],
     });
 
-    console.log("+++++++ Getting response form AI Model: response", response);
+    console.log("+++++++ Getting response form AI Model: response", response.choices[0]);
     const res = response.choices[0].message?.content?.trim() || "{}";
-    const parsedJson = extractJson(res);
-    console.log("+++++++ parsedJson", parsedJson);
-    if (parsedJson) {
-      console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
-    } else {
-      console.error('Failed to extract JSON.');
-    }
-    return JSON.parse(res).reviews;
+    const newRes = res + "]}";
+    // const parsedJson = extractJson(newRes);
+    // console.log("+++++++ parsedJson", parsedJson);
+    // if (parsedJson) {
+    //   console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
+    // } else {
+    //   console.error('Failed to extract JSON.');
+    // }
+    return JSON.parse(newRes).reviews;
   } catch (error) {
     console.error("Error:", error);
     return null;

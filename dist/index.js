@@ -136,7 +136,7 @@ ${chunk.changes
         // @ts-expect-error - ln and ln2 exists where needed
         .map((c) => `${c.ln ? c.ln : c.ln2} ${c.content}`)
         .join("\n")}
-\`\`\`[/INST]`;
+\`\`\`[/INST] { "reviews": [`;
 }
 function getAIResponse(prompt) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -158,17 +158,17 @@ function getAIResponse(prompt) {
                         content: prompt,
                     },
                 ] }));
-            console.log("+++++++ Getting response form AI Model: response", response);
+            console.log("+++++++ Getting response form AI Model: response", response.choices[0]);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
-            const parsedJson = extractJson(res);
-            console.log("+++++++ parsedJson", parsedJson);
-            if (parsedJson) {
-                console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
-            }
-            else {
-                console.error('Failed to extract JSON.');
-            }
-            return JSON.parse(res).reviews;
+            const newRes = res + "]}";
+            // const parsedJson = extractJson(newRes);
+            // console.log("+++++++ parsedJson", parsedJson);
+            // if (parsedJson) {
+            //   console.log('Extracted JSON:', JSON.stringify(parsedJson, null, 2));
+            // } else {
+            //   console.error('Failed to extract JSON.');
+            // }
+            return JSON.parse(newRes).reviews;
         }
         catch (error) {
             console.error("Error:", error);
