@@ -163,6 +163,7 @@ function getAIResponse(prompt) {
             const responseObject = JSON.parse(responseString);
             console.log("Parsed response object:", responseObject);
             console.log("Parsed response object.choices:", responseObject["choices"]);
+            console.log("Parsed response object.choices[0]:", responseObject["choices"][0]);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
             const newRes = res + "]}";
             // const parsedJson = extractJson(newRes);
