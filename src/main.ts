@@ -142,6 +142,8 @@ async function getAIResponse(prompt: string): Promise<Array<{
     });
 
     console.log("+++++++ Getting response form AI Model: ", response);
+    const responseString = JSON.stringify(response);
+    console.log("+++++++ Response string: ", responseString);
     console.log("+++++++ Response keys: ", Object.keys(response));
     const ewwresponse = JSON.parse(response.object);
     console.log("+++++++ ewwresponse: ", ewwresponse);
