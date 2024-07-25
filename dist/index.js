@@ -162,11 +162,7 @@ function getAIResponse(prompt) {
             const responseString = JSON.stringify(response);
             const responseObject = JSON.parse(responseString);
             console.log("Parsed response object:", responseObject);
-            console.log("+++++++ Response string: ", responseString);
-            console.log("+++++++ Response keys: ", Object.keys(response));
-            const ewwresponse = JSON.parse(response.object);
-            console.log("+++++++ ewwresponse: ", ewwresponse);
-            console.log("+++++++ Getting response form AI Model: response", response["choices"]);
+            console.log("Parsed response object.choices:", responseObject["choices"]);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
             const newRes = res + "]}";
             // const parsedJson = extractJson(newRes);
