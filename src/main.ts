@@ -141,7 +141,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
       ],
     });
 
-    console.log("+++++++ Getting response form AI Model: response", response.choices[0]);
+    console.log("+++++++ Getting response form AI Model: response", response["choices"]);
     const res = response.choices[0].message?.content?.trim() || "{}";
     const newRes = res + "]}";
     // const parsedJson = extractJson(newRes);
